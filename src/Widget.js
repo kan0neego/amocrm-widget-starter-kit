@@ -1,11 +1,13 @@
-import WidgetCallbacks from './WidgetCallbacks';
+import WidgetCallbacks from "./WidgetCallbacks";
+import DEPENDENCIES from "./dependencies";
 
-/**
- * Не стоит объявлять как класс,
- * т.к. amoCRM делает инъекцию в прототип системных методов
- */
 const Widget = function () {
-    this.callbacks = new WidgetCallbacks(this);
+  const { settingsHelper, widgetContext, getTemplate } = DEPENDENCIES;
+  widgetContext.set(this);
+  settingsHelper.set(this.get_settings());
+
+  this.setTemplate = getTemplate();
+  this.callbacks = new WidgetCallbacks(this);
 };
 
 export default Widget;

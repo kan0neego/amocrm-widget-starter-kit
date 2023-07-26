@@ -1,42 +1,45 @@
 export default class WidgetCallbacks {
-    /** @type {Widget} */
-    widget;
+  /** @type {Widget} */
+  widget;
 
-    constructor(widget) {
-        this.widget = widget;
-    }
+  constructor(widget) {
+    this.widget = widget;
+  }
 
-    init() {
-        return true;
-    }
+  init() {
+    return true;
+  }
 
-    render() {
-        return true;
-    }
-    
-    bind_actions() {
-        return true;
-    }
+  render() {
+    return true;
+  }
 
-    settings($modalBody) {
-        //
-    }
+  bind_actions() {
+    return true;
+  }
 
-    advancedSettings() {
-        //
-    }
+  settings($modalBody) {
+    this.widget.setTemplate("settings_modal", {}, function (template) {
+      const $body = $modalBody.find(".widget_settings_block");
+      $body.append(template.render());
+    });
+    return true;
+  }
 
-    dpSettings() {
-        //
-    }
+  advancedSettings() {
+    //
+  }
 
-    async onSave({active, fields}) {
-        console.log('--onSave', {this: this, active, fields});
+  dpSettings() {
+    //
+  }
 
-        return true;
-    }
+  onSave({ active, fields }) {
+   console.log("--onSave", { this: this, active, fields });
+   return true;
+  }
 
-    destroy() {
-        // 
-    }
+  destroy() {
+    //
+  }
 }
